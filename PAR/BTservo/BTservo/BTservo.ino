@@ -36,11 +36,15 @@ std_msgs::UInt16 angulo;
 ros::Publisher publicador("status" , &estado);
 
 
-
+char c=" ";
 
 void setup() {
+
+  Serial.begin(9600);
+  
   BTserial.begin(BTbaud);
 
+  nh.getHardware()->setBaud(9600);
   nh.initNode();
   nh.subscribe(sus);
   nh.advertise(publicador);
@@ -50,6 +54,13 @@ void setup() {
 }
 
 void loop() {
+
+  if (BTserial.available()){
+    c=BTserial.read();
+    Serial.write(c);
+  }
+  
+
 
   if (movement){
     estado.data = "Moving";
