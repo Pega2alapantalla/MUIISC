@@ -1,3 +1,5 @@
+close all
+
 year=2020:2031;
 year_str=num2cell(year);
 
