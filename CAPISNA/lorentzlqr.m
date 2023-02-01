@@ -92,3 +92,20 @@ damp(A1-B1*KClqr)
 % figure(3)
 % plot(time,x3)
 % grid minor
+
+%% Observador
+v_1=[0.01^2,0,0
+    0,0.01^2,0
+    0,0,0.01^2];
+v_2=[0.16^2,0,0
+    0,0.16^2,0
+    0,0,0.16^2];
+gamma=B1;
+%v_2=v_2*0.1;
+Q_o=gamma*v_1*gamma';
+R_o=v_2;
+KoT=lqr(A1',C1',Q_o,R_o);
+Ko=KoT';
+
+
+eig(A1-Ko*C1)
